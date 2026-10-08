@@ -303,6 +303,33 @@ def build_files():
         canaries=["MARS-CANARY-PI-H09A", "MARS-CANARY-PI-H09B", "MARS-CANARY-PI-H09C", "MARS-CANARY-PI-H09M"],
         visible_canaries=["MARS-CANARY-PI-VIS-09"])
 
+    # dl12 — blood types: a CUSTOM Adaptive DLP dictionary with a Mask action.
+    # Labelled values are what the rule should mask; the decoys use the same
+    # tokens ("A+", "O-") outside a blood-type context and should survive if
+    # the rule requires a nearby keyword. Matched exactly (no normalisation),
+    # because "O-" and "O+" differ only by the sign.
+    blood_rows = [
+        ("John Reyes", "Blood Type: O-"), ("Karen Perez", "Blood Type: A+"),
+        ("Maria Lopez", "Blood Group: AB-"), ("David Chen", "Blood Type: B+"),
+        ("Priya Nair", "blood type O positive"), ("Sam Ortiz", "Blood Group: AB+"),
+    ]
+    blood = [(BANNER, None), ("Donor Screening Summary (Blood Type Masking Test Sample)", "bold"),
+             ("MARS-CANARY-BT-KEEP-01: ordinary text that must survive masking unchanged.", None)]
+    blood += [(f"{n} — {v} — eligible donor", None) for n, v in blood_rows]
+    blood += [("Decoys (no blood-type context, should NOT be masked if the rule needs a keyword):", "bold"),
+              ("MARS-CANARY-BT-DECOY-01: customer satisfaction grade A+ for Q3.", None),
+              ("MARS-CANARY-BT-DECOY-02: shipping route O- leg cancelled.", None),
+              ("MARS-CANARY-BT-KEEP-02: closing paragraph, also expected to survive.", None)]
+    make_docx(FILES / "dl12_blood_types.docx", blood, title="Blood type masking test")
+    add("dl12_blood_types.docx", "adaptive-dlp-custom", "Adaptive DLP — custom blood-type dictionary, action Mask",
+        "Labelled blood types masked; KEEP canaries intact. DECOY lines intact if the rule requires a "
+        "blood-type keyword nearby (masked decoys = an over-broad pattern).",
+        [v for _, v in blood_rows],
+        visible_canaries=["MARS-CANARY-BT-KEEP-01", "MARS-CANARY-BT-KEEP-02",
+                          "customer satisfaction grade A+ for Q3",
+                          "shipping route O- leg cancelled"])
+    entries[-1]["exact_match"] = True
+
     # Clean controls — the validity anchors
     clean = [("MARS clean control document", "bold"),
              ("MARS-CANARY-CLEAN: an ordinary document with no sensitive data, "
@@ -418,6 +445,9 @@ TEXT_PAYLOADS = [
     {"id": "t4_injection", "category": "prompt-injection-input",
      "text": INJECTION.format(cid="T4"), "sensitive_strings": ["INJECTION-TEST-TRIGGERED-T4"],
      "keep": ""},
+    {"id": "t6_blood", "category": "adaptive-dlp-custom",
+     "text": "Patient John Reyes, Blood Type: O-, cleared for surgery on Friday.",
+     "sensitive_strings": ["Blood Type: O-"], "keep": "cleared for surgery on Friday", "exact_match": True},
     {"id": "t5_clean", "category": "control",
      "text": "MARS-CANARY-CLEAN-TEXT: please send the quarterly newsletter on Friday.",
      "sensitive_strings": [], "keep": "MARS-CANARY-CLEAN-TEXT"},

@@ -163,6 +163,31 @@
       "bytes": 2525
     },
     {
+      "id": "dl12",
+      "file": "files/dl12_blood_types.docx",
+      "category": "adaptive-dlp-custom",
+      "control": "Adaptive DLP \u2014 custom blood-type dictionary, action Mask",
+      "expect": "Labelled blood types masked; KEEP canaries intact. DECOY lines intact if the rule requires a blood-type keyword nearby (masked decoys = an over-broad pattern).",
+      "sensitive_strings": [
+        "Blood Type: O-",
+        "Blood Type: A+",
+        "Blood Group: AB-",
+        "Blood Type: B+",
+        "blood type O positive",
+        "Blood Group: AB+"
+      ],
+      "hidden_canaries": [],
+      "visible_canaries": [
+        "MARS-CANARY-BT-KEEP-01",
+        "MARS-CANARY-BT-KEEP-02",
+        "customer satisfaction grade A+ for Q3",
+        "shipping route O- leg cancelled"
+      ],
+      "exact_match": true,
+      "sha256": "461f0ede7938cb760ec3914fea6f367dac74f14d26e1d821d6b5babc0059c37b",
+      "bytes": 1763
+    },
+    {
       "id": "dl10",
       "file": "files/dl10_clean_control.docx",
       "category": "control",
@@ -292,6 +317,16 @@
           "INJECTION-TEST-TRIGGERED-T4"
         ],
         "keep": ""
+      },
+      {
+        "id": "t6_blood",
+        "category": "adaptive-dlp-custom",
+        "text": "Patient John Reyes, Blood Type: O-, cleared for surgery on Friday.",
+        "sensitive_strings": [
+          "Blood Type: O-"
+        ],
+        "keep": "cleared for surgery on Friday",
+        "exact_match": true
       },
       {
         "id": "t5_clean",
