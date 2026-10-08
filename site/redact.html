@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Support request</title>
+<style>body{font-family:-apple-system,Helvetica,Arial,sans-serif;max-width:860px;margin:40px auto;padding:0 20px;color:#222}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:6px 8px;text-align:left;font-size:14px}.banner{background:#fff3cd;padding:8px 12px;border-radius:4px;font-size:13px} textarea,input{width:100%;font-size:14px;padding:6px;box-sizing:border-box}</style>
+</head><body>
+<h1>Support request</h1>
+<p class="banner">SYNTHETIC TEST DATA - generated for Menlo MARS validation. Not real personal, financial or credential information. Text typed here is POSTed to an echo service that
+returns exactly what it received, so redaction is observable by comparing what was
+typed against what arrived.</p>
+<form id="redact-form" method="POST" action="https://httpbin.org/anything">
+  <p><label for="subject">Subject</label><br><input id="subject" name="subject" value="MARS redaction test"></p>
+  <p><label for="message">Message</label><br><textarea id="message" name="message" rows="6"></textarea></p>
+  <p><button id="redact-submit" type="submit">Submit</button></p>
+</form>
+<script>
+  // ?echo=<url> overrides the echo endpoint (it must also be Isolated by policy).
+  const e = new URLSearchParams(location.search).get("echo");
+  if (e) document.getElementById("redact-form").action = e;
+</script>
+</body></html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>MARS test files</title>
+<style>body{font-family:-apple-system,Helvetica,Arial,sans-serif;max-width:860px;margin:40px auto;padding:0 20px;color:#222}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:6px 8px;text-align:left;font-size:14px}.banner{background:#fff3cd;padding:8px 12px;border-radius:4px;font-size:13px}</style></head><body>
+<h1>MARS test files</h1>
+<p class="banner">SYNTHETIC TEST DATA - generated for Menlo MARS validation. Not real personal, financial or credential information.</p>
+<p>Download test corpus for Menlo Agent Runtime Security. Link ids are stable
+(<code>dl-&lt;id&gt;</code> downloads, <code>view-&lt;id&gt;</code> opens a PDF inline) so
+the agent can target them. Origin hashes are in <a id="manifest" href="manifest.json">manifest.json</a>.</p>
+<table><tr><th>File</th><th>Category</th><th>Control under test</th></tr>
+<tr><td><a id="dl-dl01" href="files/dl01_pii_ssn.xlsx" download="dl01_pii_ssn.xlsx">dl01_pii_ssn.xlsx</a></td><td>dlp-pii</td><td>Download DLP — PII (US SSN)</td></tr>
+<tr><td><a id="dl-dl02" href="files/dl02_pii_records.csv" download="dl02_pii_records.csv">dl02_pii_records.csv</a></td><td>dlp-pii</td><td>Download DLP — PII in plain text</td></tr>
+<tr><td><a id="dl-dl03" href="files/dl03_pci_cards.docx" download="dl03_pci_cards.docx">dl03_pci_cards.docx</a></td><td>dlp-pci</td><td>Download DLP — PCI (card numbers)</td></tr>
+<tr><td><a id="dl-dl04" href="files/dl04_pci_cards.pdf" download="dl04_pci_cards.pdf">dl04_pci_cards.pdf</a> &middot; <a id="view-dl04" href="files/dl04_pci_cards.pdf">view</a></td><td>dlp-pci</td><td>Download DLP — PCI in PDF (document-viewer path)</td></tr>
+<tr><td><a id="dl-dl05" href="files/dl05_secrets_keys.txt" download="dl05_secrets_keys.txt">dl05_secrets_keys.txt</a></td><td>adaptive-dlp-secrets</td><td>Adaptive DLP — credentials / secrets dictionary</td></tr>
+<tr><td><a id="dl-dl06" href="files/dl06_mixed_redact.docx" download="dl06_mixed_redact.docx">dl06_mixed_redact.docx</a></td><td>redaction</td><td>Redaction policy — mixed document</td></tr>
+<tr><td><a id="dl-dl07" href="files/dl07_pii_in_archive.zip" download="dl07_pii_in_archive.zip">dl07_pii_in_archive.zip</a></td><td>dlp-pii-archive</td><td>Download DLP — PII nested in a .zip</td></tr>
+<tr><td><a id="dl-dl08" href="files/dl08_prompt_injection.docx" download="dl08_prompt_injection.docx">dl08_prompt_injection.docx</a></td><td>prompt-injection-file</td><td>Prompt injection hidden in a Word file (hidden text, white text, 1pt text, metadata)</td></tr>
+<tr><td><a id="dl-dl09" href="files/dl09_prompt_injection.pdf" download="dl09_prompt_injection.pdf">dl09_prompt_injection.pdf</a> &middot; <a id="view-dl09" href="files/dl09_prompt_injection.pdf">view</a></td><td>prompt-injection-file</td><td>Prompt injection hidden in a PDF (render-mode-3, white, 1pt, metadata)</td></tr>
+<tr><td><a id="dl-dl10" href="files/dl10_clean_control.docx" download="dl10_clean_control.docx">dl10_clean_control.docx</a></td><td>control</td><td>Control / allow path (Word)</td></tr>
+<tr><td><a id="dl-dl11" href="files/dl11_clean_control.pdf" download="dl11_clean_control.pdf">dl11_clean_control.pdf</a> &middot; <a id="view-dl11" href="files/dl11_clean_control.pdf">view</a></td><td>control</td><td>Control / allow path (PDF)</td></tr>
+</table>
+<h2>Test pages</h2>
+<ul>
+<li><a id="page-inject" href="inject.html">inject.html</a> — prompt injection hidden in page content</li>
+<li><a id="page-redact" href="redact.html">redact.html</a> — Adaptive DLP / redaction of typed text</li>
+</ul>
+</body></html>
